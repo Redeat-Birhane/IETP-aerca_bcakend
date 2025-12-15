@@ -1,1 +1,1 @@
-web: gunicorn aerca_backend.wsgi
+web: gunicorn aerca_backend.wsgi:application
