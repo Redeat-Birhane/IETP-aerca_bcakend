@@ -1218,22 +1218,3 @@ def search(request):
 
     return JsonResponse({"results": results})
 
-@csrf_exempt
-def create_admin(request):
-    if request.method != "POST":
-        return JsonResponse({"error": "POST request required"}, status=405)
-    
-    try:
-        data = json.loads(request.body)
-        username = data.get("username")
-        email = data.get("email")
-        password = data.get("password")
-    except:
-        return JsonResponse({"error": "Invalid JSON"}, status=400)
-
-    User = get_user_model()
-    if User.objects.filter(username=username).exists():
-        return JsonResponse({"message": "Superuser already exists"})
-
-    User.objects.create_superuser(username=username, email=email, password=password)
-    return JsonResponse({"message": "Superuser created successfully"})

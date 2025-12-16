@@ -33,8 +33,7 @@ urlpatterns = [
     path("ask_support/", views.create_support_ticket, name="ask_support"),
     path("view_support/", views.my_support_tickets, name="view_support"),
     path("view_community_questions/", views.list_community_questions, name="view_questions"),
-    path("search/", views.search, name="search"),
-    path("create_admin/", views.create_admin, name="admin"),
+    path("search/", views.search, name="search")
 
 
 
