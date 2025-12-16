@@ -1218,7 +1218,7 @@ def search(request):
 
     return JsonResponse({"results": results})
 
-
+@csrf_exempt
 def create_admin(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required"}, status=405)
