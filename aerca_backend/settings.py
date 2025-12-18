@@ -168,14 +168,14 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 SESSION_COOKIE_NAME = "sessionid"
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = "Lax"  # Lax works in localhost, None requires HTTPS
-SESSION_COOKIE_SECURE = False     # True only if using HTTPS
+SESSION_COOKIE_SAMESITE = "None"  # Lax works in localhost, None requires HTTPS
+SESSION_COOKIE_SECURE = True     # True only if using HTTPS
 
 # CSRF cookies
 CSRF_COOKIE_NAME = "csrftoken"
 CSRF_COOKIE_HTTPONLY = False      # Must be readable by JS
 CSRF_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = True
 
 # Trusted origins for CSRF
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",
