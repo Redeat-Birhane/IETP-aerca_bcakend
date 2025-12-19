@@ -343,7 +343,7 @@ def sent_messages(request):
     return JsonResponse({"messages": data})
 
 
-
+@login_required
 def list_tax_workers(request):
     tax_workers = TaxWorkerProfile.objects.select_related("user") # type: ignore
 
@@ -506,7 +506,7 @@ def answer_question(request):
 
 
 
-
+@login_required
 def list_transitors(request):
     transitors = TransitorProfile.objects.select_related("user")
     data = []
@@ -589,7 +589,7 @@ def send_transitor_request(request):
 
 
 
-
+@login_required
 def list_instructors(request):
     instructors = InstructorProfile.objects.select_related("user")
     data = []
