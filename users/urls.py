@@ -1,5 +1,7 @@
-from django.urls import path # type: ignore
+from django.urls import path  # type: ignore
 from . import views
+from django.conf import settings # type: ignore
+from django.conf.urls.static import static # type: ignore
 
 urlpatterns = [
     path("signup/", views.signup_view, name = "signup"),
@@ -34,11 +36,14 @@ urlpatterns = [
     path("view_support/", views.my_support_tickets, name="view_support"),
     path("view_community_questions/", views.list_community_questions, name="view_questions"),
     path("search/", views.search, name="search")
-
-
-
-   
-   
-
-
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+   
+   
+
+

@@ -148,6 +148,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 
@@ -177,17 +181,6 @@ CSRF_COOKIE_HTTPONLY = False      # Must be readable by JS
 CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_SECURE = True
 
-# Trusted origins for CSRF
-# if DEBUG:
-#     SESSION_COOKIE_SAMESITE = "Lax"
-#     SESSION_COOKIE_SECURE = False
-#     CSRF_COOKIE_SAMESITE = "Lax"
-#     CSRF_COOKIE_SECURE = False
-# else:
-#     SESSION_COOKIE_SAMESITE = "None"
-#     SESSION_COOKIE_SECURE = True
-#     CSRF_COOKIE_SAMESITE = "None"
-#     CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",
 "http://localhost:3001"]
