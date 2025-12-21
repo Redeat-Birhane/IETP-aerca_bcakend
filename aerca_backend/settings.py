@@ -145,12 +145,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+STATICFILES_DIRS = [
+    BASE_DIR / "ai_receipts",
+    BASE_DIR / "business_cards", 
+    BASE_DIR / "certificates",   # your global static folder
+    BASE_DIR / "licenses", 
+    BASE_DIR / "profiles", 
+    BASE_DIR / "receipts", 
+    BASE_DIR / "store_items", 
+]
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 
