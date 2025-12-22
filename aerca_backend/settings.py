@@ -175,7 +175,7 @@ AUTHENTICATION_BACKENDS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:3001",
-    "https://ietp-aerca-frontend-3brp-o50qnavws.vercel.app"
+    "https://ietp-aerca-frontend.vercel.app",
     
 ]
 CORS_ALLOW_CREDENTIALS = True
@@ -192,5 +192,5 @@ CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:3000",
 "http://localhost:3001",
-"https://ietp-aerca-frontend-3brp-o50qnavws.vercel.app"
+"https://ietp-aerca-frontend.vercel.app"
 ]
