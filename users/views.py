@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model # type: ignore
 from decimal import Decimal
 from django.utils import timezone # type: ignore
 from datetime import timedelta
-from django.views.decorators.csrf import ensure_csrf_cookie # type: ignore
+
 
 @csrf_exempt
 def signup_view(request):
@@ -1040,7 +1040,7 @@ def list_laws(request):
     })
 
 
-@ensure_csrf_cookie
+@csrf_exempt
 def list_community_questions(request):
     questions = CommunityQuestion.objects.all().order_by("-created_at")
 
