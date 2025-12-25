@@ -23,6 +23,8 @@ class InstructorSignupForm(BaseSignupForm):
     photo = forms.ImageField(required=False)
     years_of_experience = forms.IntegerField(required=True)
     course_title = forms.CharField(required=True)
+    course_material = forms.FileField(required=False)
+
 
 
 
@@ -34,6 +36,6 @@ class TaxWorkerSignupForm(BaseSignupForm):
     company_id_card = forms.FileField(required=True)
     phone_number = forms.CharField(required=False)
     years_of_experience = forms.IntegerField(required=True)
-    location = forms.CharField(required=False) 
+    location = forms.CharField(required=True) 
 
 

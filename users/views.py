@@ -17,7 +17,7 @@ from django.utils import timezone # type: ignore
 from datetime import timedelta
 
 
-@csrf_exempt
+
 def signup_view(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST required"}, status=405)
@@ -522,6 +522,7 @@ def list_transitors(request):
         except TransitorRequest.DoesNotExist:
             status = None
         avg_rating = TransitorRating.objects.filter(transitor=t).aggregate(Avg('rating'))['rating__avg']
+        avg_rating = round(avg_rating, 2) if avg_rating is not None else None
 
         data.append({
             "username": t.user.username,
@@ -685,6 +686,7 @@ def rate_tax_worker(request):
 
  
     avg_rating = TaxWorkerRating.objects.filter(tax_worker=tax_worker_profile).aggregate(rating_avg=Avg('rating'))['rating_avg']
+    avg_rating = round(avg_rating, 2) if avg_rating is not None else None
     tax_worker_profile.rating = avg_rating
     tax_worker_profile.save()
 
@@ -732,6 +734,7 @@ def rate_instructor(request):
 
 
     avg_rating = InstructorRating.objects.filter(instructor=instructor_profile).aggregate(Avg('rating'))['rating__avg']
+    avg_rating = round(avg_rating, 2) if avg_rating is not None else None
     instructor_profile.rating = avg_rating
     instructor_profile.save()
 
@@ -779,6 +782,7 @@ def rate_transitor(request):
 
    
     avg_rating = TransitorRating.objects.filter(transitor=transitor_profile).aggregate(Avg('rating'))['rating__avg']
+    avg_rating = round(avg_rating, 2) if avg_rating is not None else None
     transitor_profile.rating = avg_rating
     transitor_profile.save()
 
@@ -1154,8 +1158,8 @@ def my_support_tickets(request):
 def search(request):
     category = request.GET.get("category")
     query = request.GET.get("query", "")
-    min_price = request.GET.get("min_price")
-    max_price = request.GET.get("max_price")
+    min_price = Decimal(request.GET.get("min_price"))
+    max_price = Decimal(request.GET.get("max_price"))
 
     results = []
 
