@@ -849,7 +849,9 @@ def list_store_items(request):
             "description": i.description,
             "price": str(i.price),
             "photo": i.photo.url if i.photo else None,
-            "location": i.location
+            "location": i.location,
+            "size": i.size, 
+            "enhancement": i.enhancement
         }
         for i in items
     ]
