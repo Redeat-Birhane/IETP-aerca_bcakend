@@ -200,16 +200,18 @@ class InstructorRating(models.Model):
     def __str__(self):
         return f"{self.user.email} rated {self.instructor.user.email}: {self.rating}"
 
-
 class StoreItem(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     photo = models.ImageField(upload_to="store_items/", blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
+    size = models.CharField(max_length=50, blank=True, null=True)  
+    enhancement = models.TextField(blank=True, null=True) 
 
     def __str__(self):
         return self.name
+
 
 
 class CartItem(models.Model):

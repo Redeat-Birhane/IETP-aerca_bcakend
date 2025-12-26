@@ -1158,8 +1158,6 @@ def my_support_tickets(request):
 def search(request):
     category = request.GET.get("category")
     query = request.GET.get("query", "")
-    min_price = Decimal(request.GET.get("min_price"))
-    max_price = Decimal(request.GET.get("max_price"))
     show_new = request.GET.get("new")
 
     results = []
@@ -1212,22 +1210,40 @@ def search(request):
         ]
 
     elif category == "store":
-        items = StoreItem.objects.all()
-        if min_price is not None:
-            items = items.filter(price__gte=min_price)
-        if max_price is not None:
-            items = items.filter(price__lte=max_price)
-        results = [
-            {
-                "id": item.id,
-                "name": item.name,
-                "description": item.description,
-                "price": str(item.price),
-                "photo": item.photo.url if item.photo else None,
-                "location": item.location
-            }
-            for item in items
-        ]
+            min_price = request.GET.get("min_price")
+            max_price = request.GET.get("max_price")
+            size = request.GET.get("size")
+            enhancement = request.GET.get("enhancement")
+            try:
+                min_price = Decimal(min_price) if min_price is not None else None
+                max_price = Decimal(max_price) if max_price is not None else None
+            except:
+                return JsonResponse({"error": "Invalid min_price or max_price"}, status=400)
+            items = StoreItem.objects.all()
+            if min_price is not None:
+                items = items.filter(price__gte=min_price)
+            if max_price is not None:
+                items = items.filter(price__lte=max_price)
+            if size:
+                items = items.filter(size__iexact=size)  # exact match, case-insensitive
+
+    # Optional enhancement filter
+            if enhancement:
+                items = items.filter(enhancement__icontains=enhancement)  # partial match
+
+            results = [
+                {
+                    "id": item.id,
+                    "name": item.name,
+                    "description": item.description,
+                    "price": str(item.price),
+                    "photo": item.photo.url if item.photo else None,
+                    "location": item.location,
+                    "size": item.size,
+                    "enhancement": item.enhancement
+                }
+                for item in items
+            ]
     elif category == "laws":
         laws = LawAuthority.objects.filter(name__icontains=query)
         if show_new == "true":
