@@ -1247,7 +1247,7 @@ def search(request):
                 for item in items
             ]
     elif category == "laws":
-        laws = LawAuthority.objects.filter(name__icontains=query)
+        laws = LawAuthority.objects.filter(category__icontains=query)
         if show_new == "true":
             thirty_days_ago = timezone.now() - timedelta(days=30)
             laws = laws.filter(created_at__gte=thirty_days_ago)
