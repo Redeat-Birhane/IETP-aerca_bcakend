@@ -1156,7 +1156,7 @@ def my_support_tickets(request):
     })
 
 
-@login_required
+
 def search(request):
     category = request.GET.get("category")
     query = request.GET.get("query", "")
